@@ -1,0 +1,1724 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharePodLib</name>
+    </assembly>
+    <members>
+        <member name="T:SharePodLib.Parsers.BaseDatabaseElement">
+            <summary>
+            Internally used by SharePodLib.  Should not be used from external code. 
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.PlaylistSortField">
+            <summary>
+            Field iTunes uses to sort the playlist.  This is a manual sort, the iPod doesnt do it for us.
+            Currently SharePodLib doesnt do sorting.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.Playlist">
+            <summary>
+            An iPod Playlist.  There are 4 diffent types of playlists currently. (Master playlist, Smart, Podcast, Standard).
+            The Master Playlist holds all tracks on the iPod.  
+            Smart playlists are rebuilt by iTunes based on rules (Artist=Nirvana etc).
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.Playlist.ContainsTrack(SharePodLib.Parsers.iTunesDB.Track)">
+            <summary>
+            Returns true if this playlist contains the specified track.
+            </summary>
+            <param name="track"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.Playlist.AddTrack(SharePodLib.Parsers.iTunesDB.Track)">
+            <summary>
+            Add the specifed track to the end of this playlist.  If the track already exists it won't be added twice.
+            </summary>
+            <param name="track"></param>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.Playlist.AddTrack(SharePodLib.Parsers.iTunesDB.Track,System.Int32)">
+            <summary>
+            Add the specifed track to this playlist at the specified position.  If the track already exists it won't be added twice.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.Playlist.RemoveTrack(SharePodLib.Parsers.iTunesDB.Track)">
+            <summary>
+            Remove the specified track from this playlist.  This doesn't remove the track from the iPod (see TrackList.Remove())
+            </summary>
+            <param name="track"></param>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.Playlist.MoveTrackToPosition(SharePodLib.Parsers.iTunesDB.Track,System.Int32)">
+            <summary>
+            Move the specified track to the specified position in the playlist.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.Playlist.ReIndex">
+            <summary>
+            Create the index (fast lookup table) the iPod uses for Artist, Album, Genre menus.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.Name">
+            <summary>
+            Playlist name as it appears on the iPod.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.IsMaster">
+            <summary>
+            True if this playlist is the Master playlist.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.IsSmartPlaylist">
+            <summary>
+            True if this playlist is a Smart playlist.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.IsPodcastPlaylist">
+            <summary>
+            True if this playlist is a Podcast playlist.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.SortField">
+            <summary>
+            Field iTunes uses to sort the playlist.  This is a manual sort, the iPod doesnt do it for us.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.BindingTrackList">
+            <summary>
+            Databound list of tracks in this playlist.  Tracks shouldnt be added/removed through this list (instead you should go through the normal
+            iPod.Playlists[1].Tracks.Add(track), but its useful to bind to a DataGridView or other control which supports databinding
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.TrackCount">
+            <summary>
+            How many tracks are in this playlist.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.ItemCount">
+            <summary>
+            How many playlist items are in this playlist
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.Tracks">
+            <summary>
+            Enumerates each track in this playlist.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.LengthSummary">
+            <summary>
+            Returns the total length of tracks in this playlist as a hh:mm:ss string.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Playlist.SizeSummary">
+            <summary>
+            Returns the total size of tracks in this playlist as Mb or Gb (whichever is more appropriate).
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.InvalidValueException">
+            <summary>
+            Thrown when an invalid value is specified for a track or playlist property
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.ImageListContainer">
+            <summary>
+            Implements a type 1 (Image list) MHSD entry in ArtworkDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.IPodDevice.FileSystems.StandardFileSystem">
+            <summary>
+            Abstraction of a standard (disk-based) iPod file system.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem">
+            <summary>
+            Abstraction of the file system used by a specific iPod.  Currently, this is either standard or iPhone.
+            Additional DeviceFileSystems can be added at runtime - see SharePodLib.RegisteredFileSystems
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name">Name of this profile</param>
+            <param name="iTunesFolderPath">Path of the iTunes folder</param>
+            <param name="musicFolderPath">Path of the Music folder</param>
+            <param name="expectedDriveType">DriveType the profile uses</param>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.AvailableFreeSpace">
+            <summary>
+            Amount of free space on the filesystem minus 10MB to make sure we have space to save the iPod databases
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.FailsafeMode">
+            <summary>
+            For disk-based iPods, failsafe mode causes files to be copied using standard File.Copy(), instead of buffer copying.  
+            There will be no FileCopyProgress events thrown.  For iPhone/iTouch this has no effect. 
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.ParseDbFilesLocally">
+            <summary>
+            If this is true, the iTunesDB and ArtworkDB files will be copied to the system temp folder before parsing.  Depending on the PC's hardware/conf,
+            this might be slower or faster than parsing straight from the iPod drive.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.Name">
+            <summary>
+            Name of the profile
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.IPodControlPath">
+            <summary>
+            Path of the iPod's control folder (e.g. ipod_control)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.ITunesFolderPath">
+            <summary>
+            Path of the iPod's iTunes folder (e.g. ipod_control\iTunes)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.ArtworkFolderPath">
+            <summary>
+            Path of the iPod's Artwork folder (e.g. ipod_control\Artwork)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.PhotoFolderPath">
+            <summary>
+            Path of the iPod's Photo folder (e.g. ipod_control\Photos)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.ArtworkDBPath">
+            <summary>
+            The iPod's database file (e.g. ipod_control\iTunes\iTunesDB)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.PhotoDBPath">
+            <summary>
+            The iPod's database file (e.g. Photos\Photo Database)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.ITunesSDPath">
+            <summary>
+            The iPod Shuffle database file (e.g. ipod_control\iTunes\iTunesSD)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.PlayCountsPath">
+            <summary>
+            The iPod Play Counts file (e.g. ipod_control\iTunes\Play Counts)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.DeviceFileSystem.ITunesLockPath">
+            <summary>
+            The iPod's lock flag file (e.g. ipod_control\iTunes\iTunesLock)
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.OperationNotAllowedException">
+            <summary>
+            Thrown when (for example) trying to add/remove tracks from a Smart Playlist.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.ImageAlbumList">
+            <summary>
+            List of image albums
+            </summary>
+        </member>
+        <member name="T:SharePodLib.TraceLogger">
+            <summary>
+            Utility class to log events and exceptions to a file.  SharePodLib will write some events to this log if enabled.  User applications may
+            also use this to log non-SharePodLib events.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.DebugLogger">
+            <summary>
+            Utility class to log Trace.Write/WriteLine events and exceptions to a file.  
+            SharePodLib will write some events to this log if enabled.  User applications may also use this to log non-SharePodLib events.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.DebugLogger.StartLogging(System.String)">
+            <summary>
+            Start logging.  
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:SharePodLib.DebugLogger.StopLogging">
+            <summary>
+            Stop all logging.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.DebugLogger.LogException(System.Exception)">
+            <summary>
+            Log an Exception. Will be prefaced with 'Exception: '
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="M:SharePodLib.DebugLogger.LogUnhandledException(System.Object)">
+            <summary>
+            Log an Exception. Will be prefaced with 'Unhandled Exception: '
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="T:SharePodLib.NewTrack">
+            <summary>
+            Used to add new tracks to the iPod
+            </summary>
+        </member>
+        <member name="F:SharePodLib.NewTrack.Title">
+            <summary>
+            Title of the track. Cannot be empty.
+            </summary>
+        </member>
+        <member name="F:SharePodLib.NewTrack.FilePath">
+            <summary>
+            Full path of the file to import. Can not be empty.
+            </summary>
+        </member>
+        <member name="F:SharePodLib.NewTrack.Length">
+            <summary>
+            Length of track in milliseconds
+            </summary>
+        </member>
+        <member name="F:SharePodLib.NewTrack.Bitrate">
+            <summary>
+            Bitrate in kb (e.g. 192)
+            </summary>
+        </member>
+        <member name="F:SharePodLib.NewTrack.DescriptionText">
+            <summary>
+            Only displayed on the iPod for Podcast tracks
+            </summary>
+        </member>
+        <member name="F:SharePodLib.NewTrack.AlbumTrackCount">
+            <summary>
+            How many tracks in the album
+            </summary>
+        </member>
+        <member name="F:SharePodLib.NewTrack.DiscNumber">
+            <summary>
+            Number of disc in the set
+            </summary>
+        </member>
+        <member name="F:SharePodLib.NewTrack.TotalDiscCount">
+            <summary>
+            How many discs in the set
+            </summary>
+        </member>
+        <member name="F:SharePodLib.NewTrack.IsVideo">
+            <summary>
+            True if this item contains a video stream, otherwise false. Cannot be null.
+            </summary>
+        </member>
+        <member name="F:SharePodLib.NewTrack.ArtworkFile">
+            <summary>
+            Path to an image file which will be used for the track's album art.  Can be null.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.IPodNotFoundException">
+            <summary>
+            Thrown when an iPod couldnt be found during a call to SharePod.GetConnectedIPod()
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.Type5Container">
+            <summary>
+            Implements a type 5 MHSD entry in iTunesDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.DatabaseHash.Hash72">
+            <summary>
+            Currently this shells out to a native c console app that computes and writes the correct hash for a given iTunesDB file
+            
+            TODO: Convert that c app (lots of complex c/asm code) to c#...
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.SupportedArtworkFormat">
+            <summary>
+            Represents an Artwork format supported by an iPod.  See IPod.DeviceInfo.SupportedArtworkFormats.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.DeviceQueryException">
+            <summary>
+            Thrown when the device is queried and fails to obtain a handle to the device.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Win32Hook">
+            <summary>
+            Summary description for Win32Hooks.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.InvalidIPodDriveException">
+            <summary>
+            Thrown when an invalid drive is specified to a call to IPod.GetIPodByDrive()
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.UnknownListContainer">
+            <summary>
+            Implements any unknown type MHSD entry in iTunesDB
+            Simply reads to the end of the list, ignoring the contents.
+            Role is to protect against future iTunesDB changes.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.ListContainerHeader">
+            <summary>
+            Implements a generic MHSD entry in ArtworkDB
+            </summary>
+        </member>
+        <member name="T:UsbEject.Library.Device">
+            <summary>
+            A generic base class for physical devices.
+            </summary>
+        </member>
+        <member name="M:UsbEject.Library.Device.Eject(System.Boolean)">
+            <summary>
+            Ejects the device.
+            </summary>
+            <param name="allowUI">Pass true to allow the Windows shell to display any related UI element, false otherwise.</param>
+            <returns>null if no error occured, otherwise a contextual text.</returns>
+        </member>
+        <member name="M:UsbEject.Library.Device.CompareTo(System.Object)">
+            <summary>
+            Compares the current instance with another object of the same type.
+            </summary>
+            <param name="obj">An object to compare with this instance.</param>
+            <returns>A 32-bit signed integer that indicates the relative order of the comparands.</returns>
+        </member>
+        <member name="P:UsbEject.Library.Device.Index">
+            <summary>
+            Gets the device's index.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.DeviceClass">
+            <summary>
+            Gets the device's class instance.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.Path">
+            <summary>
+            Gets the device's path.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.InstanceHandle">
+            <summary>
+            Gets the device's instance handle.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.Class">
+            <summary>
+            Gets the device's class name.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.ClassGuid">
+            <summary>
+            Gets the device's class Guid as a string.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.Description">
+            <summary>
+            Gets the device's description.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.FriendlyName">
+            <summary>
+            Gets the device's friendly name.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.PNPDeviceID">
+            <summary>
+            Gets the device's friendly name.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.Capabilities">
+            <summary>
+            Gets the device's capabilities.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.IsUsb">
+            <summary>
+            Gets a value indicating whether this device is a USB device.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.Parent">
+            <summary>
+            Gets the device's parent device or null if this device has not parent.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Device.RemovableDevices">
+            <summary>
+            Gets this device's list of removable devices.
+            Removable devices are parent devices that can be removed.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.IPodDevice.FileSystems.IPhoneFileSystem">
+            <summary>
+            Abstraction of an iPhone/iTouch file system.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPodDevice.FileSystems.IPhoneFileSystem.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name">Name of this profile</param>
+            <param name="iTunesFolderPath">Path of the iTunes folder</param>
+            <param name="musicFolderPath">Path of the Music folder</param>
+        </member>
+        <member name="T:SharePodLib.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.HashGenerationException">
+            <summary>
+            Thrown when a hash has failed to generate for an iPod database file
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.MediaType">
+            <summary>
+            Type of Media for a Track
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.Track">
+            <summary>
+            An iPod track.  A track is either an Audio or Video file.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.Track.SetArtwork(System.String)">
+            <summary>
+            Adds or updates the artwork associated with this track
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.Track.SetArtwork(System.Drawing.Image)">
+            <summary>
+            Adds or updates the artwork associated with this track
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.Track.RemoveArtwork">
+            <summary>
+            Removes the artwork associated with this track
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Track.DescriptionText">
+            <summary>
+            This is only used for Podcast tracks.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Track.FilePath">
+            <summary>
+            Path to the actual file on the iPod drive.  This does not contain the iPod drive letter.
+            (e.g. "ipod_control\music\f00\1234.mp3")
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Track.IsCompilation">
+            <summary>
+            True if song is part of a Compilation.  Will appear under Compilations on iPod if Settings > Compilations is turned on.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Track.AlbumTrackCount">
+            <summary>
+            Number of tracks in the album
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Track.VolumeAdjustment">
+            <summary>
+            Volume Adjustment can be between -255 and 255. 0 is default.  Use to make songs louder or quieter than normal.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Track.PlayCount">
+            <summary>
+            How many times the track has been played
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Track.DateLastPlayed">
+            <summary>
+            When the track was last played
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Track.MediaType">
+            <summary>
+            Type of Media this track is. (Audio, Movie, TV Show etc)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Track.RememberPlaybackPosition">
+            <summary>
+            Whether the iPod should resume or start again when playing this track.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.Track.Artwork">
+            <summary>
+            List of all album art formats attached to this track.
+            To add/remove artwork, use the SetArtwork() and RemoveArtwork() methods.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesCDB.SqliteTables.InsertNewTrack(SharePodLib.Parsers.iTunesDB.Track)">
+            <summary>
+            Insert a new track into the Sqlite database.  Library.itdb and Locations.itdb are both updated.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesCDB.SqliteTables.RemoveDeletedTracks">
+            <summary>
+            Remove all tracks which have been deleted this session.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesCDB.SqliteTables.UpdatePlaylists(System.Collections.Generic.List{SharePodLib.Parsers.iTunesDB.Playlist})">
+            <summary>
+            Syncs up the Sqlite playlists with the iTunesCDB playlists.
+            </summary>
+            <param name="playlists"></param>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesCDB.SqliteTables.UpdateLocationsCbk">
+            <summary>
+            This is where the magic happens.  Without this, the iPod will refuse to accept any changes.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesCDB.SqliteTables_Nano5G.ReindexTable(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Updates the whole-table sort column so items appear on the iPod in alphabetical order
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.ImageAlbumListContainer">
+            <summary>
+            Implements a type 2 (Image album list) MHSD entry in ArtworkDB / PhotoDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.ArtworkDBNotFoundException">
+            <summary>
+            Thrown if artwork is added to an iPod without an ArtworkDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.IPodDevice.FileSystems.IDeviceInfo">
+            <summary>
+            Holds information about the iPod (Type, FirewireId, Serial #, supported artwork formats etc.)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.IDeviceInfo.ReadException">
+            <summary>
+            Exception which occured while retrieving device information
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.IDeviceInfo.FirewireId">
+            <summary>
+            FirewireId of iPod. Used to generate iTunesDB database hash.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.IDeviceInfo.SerialNumber">
+            <summary>
+            Serial number of iPod.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.IDeviceInfo.SerialNumberForHashing">
+            <summary>
+            Serial number of iPod used for hashing schemes.  May be the same or different to SerialNumber
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.IDeviceInfo.Family">
+            <summary>
+            Type of iPod.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.IDeviceInfo.FamilyId">
+            <summary>
+            If Family is unknown, FamilyId can be used until SharePodLib is updated to include the new value in the IPodFamily enum.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.IDeviceInfo.SupportedArtworkFormats">
+            <summary>
+            List of artwork formats supported by this iPod.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.IDeviceInfo.SupportedPhotoFormats">
+            <summary>
+            List of photo formats supported by this iPod.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.IDeviceInfo.RawDeviceDescriptor">
+            <summary>
+            Most disk-based iPod's can provide a device descriptor when queried.  This is the raw result. Useful if you need more information about
+            the iPod than IDeviceInfo provides.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Session.TempFilesPath">
+            <summary>
+            Folder used for storing per-session temporary files
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesCDB.Icu">
+            <summary>
+            ICU is what the iPod uses to decide how to order items taking internationalisation into consideration.
+            http://site.icu-project.org/
+            http://code.google.com/p/icu-dotnet/
+            </summary>
+        </member>
+        <member name="F:SharePodLib.Forms.FileCopyPrompt.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Forms.FileCopyPrompt.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SharePodLib.Forms.FileCopyPrompt.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.TrackListContainer">
+            <summary>
+            Implements a type 1 (Tracks list) MHSD entry in iTunesDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.UnsupportedITunesVersionException">
+            <summary>
+            Thrown when the iPod database version is below 0x14. iTunes 7.1 and above create 0x14(+) databases.
+            If the version is below 0x14, SharePodLib will try and read it, but will not enable modifications.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.IThmbFileList">
+            <summary>
+            List of ithmb artwork files
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.Artwork.IThmbFileList.Files">
+            <summary>
+            Enumerates each IThmbFile in this list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:UsbEject.Library.VolumeDeviceClass">
+            <summary>
+            The device class for volume devices.
+            </summary>
+        </member>
+        <member name="T:UsbEject.Library.DeviceClass">
+            <summary>
+            A generic base class for physical device classes.
+            </summary>
+        </member>
+        <member name="M:UsbEject.Library.DeviceClass.#ctor(System.Guid,System.IntPtr)">
+            <summary>
+            Initializes a new instance of the DeviceClass class.
+            </summary>
+            <param name="classGuid">A device class Guid.</param>
+            <param name="hwndParent">The handle of the top-level window to be used for any user interface or IntPtr.Zero for no handle.</param>
+        </member>
+        <member name="M:UsbEject.Library.DeviceClass.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.DeviceClass.ClassGuid">
+            <summary>
+            Gets the device class's guid.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.DeviceClass.Devices">
+            <summary>
+            Gets the list of devices of this device class.
+            </summary>
+        </member>
+        <member name="M:UsbEject.Library.VolumeDeviceClass.#ctor">
+            <summary>
+            Initializes a new instance of the VolumeDeviceClass class.
+            </summary>
+        </member>
+        <member name="T:UsbEject.Library.DiskDeviceClass">
+            <summary>
+            The device class for disk devices.
+            </summary>
+        </member>
+        <member name="M:UsbEject.Library.DiskDeviceClass.#ctor">
+            <summary>
+            Initializes a new instance of the DiskDeviceClass class.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Databinding.DataBoundList`1">
+            <summary>
+            Class for DataBinding lists.  (See TracksList, PlaylistList, Playlist).  
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:SharePodLib.Databinding.SortableFilteringBindingList`1">
+            <summary>
+            Base Class for DataBoundList.  
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:SharePodLib.IPodFamily">
+            <summary>
+            Enumeration of the different iPod types
+            </summary>
+        </member>
+        <member name="T:SharePodLib.IPodBackup">
+            <summary>
+            Provides static methods for backing up and restoring the iPod database.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPodBackup.BackupDatabase(SharePodLib.IPod)">
+            <summary>
+            Will backup the iPod's database (iTunesDB, ArtworkDB files) if it hasnt been backed up this session already.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPodBackup.GetBackups(SharePodLib.IPod)">
+            <summary>
+            Returns a list of SharePodLib backup files (files called *.spbackup in backups folder)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.IPodBackup.RestoreDatabase(SharePodLib.IPod,System.String)">
+            <summary>
+            Restores the iPod's database from the given file.
+            Use with care - no checking is done to ensure this is a valid iTunesDB, ArtworkDB.
+            See GetBackups() for available backups
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodBackup.BackupsFolder">
+            <summary>
+            If not set, this defaults to [ApplicationData]\SharePod\Backups.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodBackup.NumberBackupsToKeep">
+            <summary>
+            Number of backup files to keep before deleting old files.  
+            Defaults to 1
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodBackup.EnableBackups">
+            <summary>
+            Enable/disable backup creation.  By default this is set to true (Enabled)
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.Type6Container">
+            <summary>
+            Implements a type 6 MHSD entry in iTunesDB
+            </summary>
+        </member>
+        <member name="T:UsbEject.Library.DeviceCapabilities">
+            <summary>
+            Contains constants for determining devices capabilities.
+            This enumeration has a FlagsAttribute attribute that allows a bitwise combination of its member values.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.UnknownListContainer">
+            <summary>
+            Implements any unknown type MHSD entry in iTunesDB
+            Simply reads to the end of the list, ignoring the contents.
+            Role is to protect against future iTunesDB changes.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.PlaylistItem">
+            <summary>
+            Implements a MHIP entry in iTunesDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.UnknownSortOrderException">
+            <summary>
+            Thrown if a Playlist's SortOrder field is not a value enumerated by SharePodLib.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.IThmbFileListContainer">
+            <summary>
+            Implements a type 3 (file list) MHSD entry in ArtworkDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.DataTypes.IPodTrackLength">
+            <summary>
+            Wraps a track length in milliseconds and a human-readable hh:mm:ss string
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.ArtworkStringMHOD">
+            <summary>
+            Implements an MHOD used in the ArtworkDB and PhotoDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.IThmbFile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.ImageAlbum">
+            <summary>
+            An Image Album
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.Artwork.ImageAlbum.Title">
+            <summary>
+            Title of this Image Album
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.Artwork.ImageAlbum.ImageCount">
+            <summary>
+            Number of images in this album
+            </summary>
+        </member>
+        <member name="T:UsbEject.Library.Volume">
+            <summary>
+            A volume device.
+            </summary>
+        </member>
+        <member name="M:UsbEject.Library.Volume.CompareTo(System.Object)">
+            <summary>
+            Compares the current instance with another object of the same type.
+            </summary>
+            <param name="obj">An object to compare with this instance.</param>
+            <returns>A 32-bit signed integer that indicates the relative order of the comparands.</returns>
+        </member>
+        <member name="P:UsbEject.Library.Volume.VolumeName">
+            <summary>
+            Gets the volume's name.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Volume.LogicalDrive">
+            <summary>
+            Gets the volume's logical drive in the form [letter]:\
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Volume.IsUsb">
+            <summary>
+            Gets a value indicating whether this volume is a based on USB devices.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Volume.Disks">
+            <summary>
+            Gets a list of underlying disks for this volume.
+            </summary>
+        </member>
+        <member name="P:UsbEject.Library.Volume.RemovableDevices">
+            <summary>
+            Gets a list of removable devices for this volume.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.ParseException">
+            <summary>
+            Thrown when the iPod database format could not be recognized or validated correctly by SharePod.
+            This could occur if the iTunes file format changes or a 3rd party application has written the 
+            database in a different way to iTunes.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.ListContainerHeader">
+            <summary>
+            Implements a generic MHSD entry in iTunesDB
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IPodFileExporterResult.FilesImportedToiTunes">
+            <summary>
+            Returns true if any files were imported into iTunes
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IPodFileExporterResult.TracksCopied">
+            <summary>
+            The output filenames of copied tracks.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IPodFileExporterResult.CopiedTrackCount">
+            <summary>
+            How many tracks were actually copied
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IPodFileExporterResult.FailedCopyTrackCount">
+            <summary>
+            How many tracks failed to copy
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IPodFileExporterResult.SecondsTaken">
+            <summary>
+            How many seconds the copy took
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IPodFileExporterResult.NbrBytesCopied">
+            <summary>
+            How many bytes were copied.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IPodFileExporterResult.WasStopped">
+            <summary>
+            True if the copy was stopped before completion
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.XmlQueryDeviceInfo.FirewireId">
+            <summary>
+            FirewireId of the iPod
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.XmlQueryDeviceInfo.SerialNumber">
+            <summary>
+            Serial number of the iPod
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.XmlQueryDeviceInfo.Family">
+            <summary>
+            Tries to return the FamilyId as an IPodFamily enum
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.XmlQueryDeviceInfo.FamilyId">
+            <summary>
+            Returns the FamilyId as an integer reported by the iPod
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.XmlQueryDeviceInfo.SupportedArtworkFormats">
+            <summary>
+            List of supported artwork sizes for the iPod
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.XmlQueryDeviceInfo.SupportedPhotoFormats">
+            <summary>
+            List of supported photo sizes for the iPod
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPodDevice.FileSystems.XmlQueryDeviceInfo.RawDeviceDescriptor">
+            <summary>
+            Returns the exact data the iPod returned to SharePodLib.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Export.IITunesImporter">
+            <summary>
+            Implement this interface to easily import tracks into iTunes.
+            You could either use the Apple SDK, or iTunes LibraryEditor (which SharePod uses).
+            http://www.1amstudios.com/products/iTunesLibraryEditor/
+            
+            See the SharePodLib-Sample for reference implementations.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Export.IITunesImporter.SetActivePlaylist(System.String)">
+            <summary>
+            Playlist that subsequent tracks should be added to.  If playlistName is null, then subsequent
+            tracks should not be added to any playlist.
+            </summary>
+            <param name="playlistName"></param>
+        </member>
+        <member name="M:SharePodLib.Export.IITunesImporter.ImportFile(System.String,SharePodLib.Parsers.iTunesDB.Track)">
+            <summary>
+            Import the specified file into iTunes
+            </summary>
+            <param name="filePath">Path to the local copied file</param>
+            <param name="iPodTrack">iPod track which was copied</param>
+        </member>
+        <member name="M:SharePodLib.Export.IITunesImporter.FinishImport">
+            <summary>
+            This is called once all tracks have been copied.  Clean up, save files etc here.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IITunesImporter.CanImport">
+            <summary>
+            Returns true if the importer can import
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.PlaylistListV2Container">
+            <summary>
+            Implements a type 3 (Playlist v2 list) MHSD entry in iTunesDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.iTunesDBRoot">
+            <summary>
+            Implements an MHBD section in the iTunesDB file
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.iTunesDBRoot.GetPlaylistList">
+            <summary>
+            Gets the PlaylistList, or PlaylistV2 if Playlist container doesn't exist
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SharePodLib.Parsers.Helpers">
+            <summary>
+            Static class containing some helpful functions.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.Helpers.GetDateTimeFromTimeStamp(System.UInt32)">
+            <summary>
+            Returns a DateTime from an iPod-format timestamp
+            </summary>
+            <param name="timestamp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.Helpers.GetTimeStampFromDate(System.DateTime)">
+            <summary>
+            Returns iPod-format timestamp from specified DateTime
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.Helpers.iPodPathToStandardPath(System.String)">
+            <summary>
+            Replaces all ":" characters with "\"
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.Helpers.StandardPathToiPodPath(System.String)">
+            <summary>
+            Replaces all "\" characters with ":"
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.Helpers.IntToITunesSDFormat(System.Int32)">
+            <summary>
+            Returns iTunesSD int format (big-endian 3 byte)
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.Helpers.GetTimeString(System.Int64)">
+            <summary>
+            Returns hh:mm:ss string from specified number of seconds
+            </summary>
+            <param name="seconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.Helpers.GetFileSizeString(System.Int64,System.Int32)">
+            <summary>
+            Returns string describing the specified filesize.  MB or GB will be displayed depending how large the number is
+            </summary>
+            <param name="fileSizeBytes"></param>
+            <param name="decimalPoints"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.Helpers.EnsureDirectoryExists(System.IO.DirectoryInfo)">
+            <summary>
+            creates folders down to the given DirectoryInfo if they dont already exist
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.Helpers.TestCompatibility(System.String,System.String)">
+            <summary>
+            Can only be called before making changes to iPod, otherwise looses point
+            Makes sure we can write back the iTunesDB file exactly as it was from our object model before making any changes.
+            In some cases this will fail - eg If there are some invalid Star Ratings in the database SharePodLib will automatically reset them to 0
+            then the write-back will be different...
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SharePodLib.IPodLoadAction">
+            <summary>
+            Enumeration of the actions SharePodLib can take when loading the iPod.
+            </summary>
+        </member>
+        <member name="F:SharePodLib.IPodLoadAction.NoSync">
+            <summary>
+            Don't do any synchronisation
+            </summary>
+        </member>
+        <member name="F:SharePodLib.IPodLoadAction.SyncPlayCounts">
+            <summary>
+            Sync the Play Counts file (contains the number of times each song has been played since last docked)
+            </summary>
+        </member>
+        <member name="T:SharePodLib.IPod">
+            <summary>
+            Represents an Apple iPod device  
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPod.Refresh">
+            <summary>
+            Reloads all iPod databases. Useful if you know another app has updated the iPod since SharePod loaded it. (As a general rule, however, 
+            you should avoid the situation of different apps reading/updating the iPod at one time!)
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPod.AcquireLock">
+            <summary>
+            Opens the ipod_control\iTunes\iTunesLock file and locks it for exclusive access.  This means if the user tries to 'Safely remove hardware'
+            from the system tray, Windows will disallow removal.  Otherwise, the device will likely be able to be disconnected.
+            Note: You must call ReleaseLock() when you're done with the iPod.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPod.ReleaseLock">
+            <summary>
+            Closes and deletes the iTunesLock file locked in the AcquireLock() call.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPod.SaveChanges">
+            <summary>
+            Save changes to iPod database (DeviceFileSystem.iTunesDBPath, DeviceFileSystem.ArtworkDBPath).
+            This will only perform a save if changes have been made, otherwise will immediately return.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPod.AssertIsWritable">
+            <summary>
+            Throws UnsupportedITunesVersionException if writing is not supported.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPod.Eject">
+            <summary>
+            Eject iPod from Windows.
+            If you try to Eject the iPod, and your code is running on the iPod, an exception will be thrown directing the
+            user to close the app and use the standard windows feature.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPod.GetConnectedIPod">
+            <summary>
+            Returns the first detected iPod.
+            Do not sync PlayCounts file.
+            </summary>
+            <returns>IPod</returns>
+        </member>
+        <member name="M:SharePodLib.IPod.GetConnectedIPod(SharePodLib.IPodLoadAction)">
+            <summary>
+            Returns the first detected iPod.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPod.GetAllConnectedIPods(SharePodLib.IPodLoadAction)">
+            <summary>
+            Returns all connected iPods. This is slower than GetConnectediPod as it must enumerate all drives, so only use if you know you need to
+            handle multiple iPods at once.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.IPod.GetiPodByDrive(System.String,SharePodLib.IPodLoadAction)">
+            <summary>
+            Loads the iPod from the specified drive.  If you already know the iPod's drive letter, this is more performant than calling GetConnectedIPod().
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.IPod.GetDeviceFileSystemForDrive(System.IO.DriveInfo)">
+            <summary>
+            Will return a DeviceFileSystem from SharePodLib.RegisteredFileSystems or null if none match
+            </summary>
+            <param name="drive"></param>
+            <returns></returns>
+        </member>
+        <member name="P:SharePodLib.IPod.Tracks">
+            <summary>
+            List of all tracks on the iPod.  Use this to add/remove/enumerate tracks
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPod.Photos">
+            <summary>
+            List of all photo albums on the iPod.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPod.Playlists">
+            <summary>
+            List of all playlists on the iPod.  Use this to add/remove/enumerate playlists
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPod.DatabaseVersion">
+            <summary>
+            Version number of the iPod's iTunesDB database.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPod.DeviceInfo">
+            <summary>
+            Type and generation of iPod (Mini, Shuffle, Video etc.)
+            Only supported for later-model iPods which support the SCSI data enquiry command.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPod.FileSystem">
+            <summary>
+            The DeviceFileSystem is an abstraction of the file system used by a specific iPod.  Currently, this is either standard or iPhone
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPod.DriveLetter">
+            <summary>
+            Drive the iPod is using.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPod.IsWritable">
+            <summary>
+            True if changes can be made to iPod.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.IPod.NeedsSaving">
+            <summary>
+            Returns true if there are in-memory changes that will be persisted to the iPod when SaveChanges() is called.
+            </summary>
+        </member>
+        <member name="F:SharePodLib.Forms.LoadingForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Forms.LoadingForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SharePodLib.Forms.LoadingForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.DataTypes.IPodRating">
+            <summary>
+            Wraps an iPod-format rating and a human-readable Star Rating
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.IPodImage">
+            <summary>
+            An iPod image.  Could either be CoverArt or a Photo.  Contains 1 or more IPodImageFormats
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.Artwork.IPodImage.Formats">
+            <summary>
+            Enumerates each valid (width > 0) artwork format.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SharePodLib.Parsers.Artwork.IPodImage.SmallestFormat">
+            <summary>
+            Returns the smallest format in this image
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.Artwork.IPodImage.LargestFormat">
+            <summary>
+            Returns the largest format in this image
+            </summary>
+        </member>
+        <member name="T:SharePodLib.SharePodLib">
+            <summary>
+            Contains SharePodLib-specific methods.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.SharePodLib.SetLicence(System.String,System.String)">
+            <summary>
+            If you have a licence key, call this method, passing in your name and key to disable the splash screen.
+            </summary>
+            <param name="name">Your registration name</param>
+            <param name="key">Your key</param>
+        </member>
+        <member name="P:SharePodLib.SharePodLib.RegisteredFileSystems">
+            <summary>
+            List of device FileSystems SharePodLib will use when searching for iPods.  This list can be updated dynamically before calling GetConnectediPod().
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.PlaylistList">
+            <summary>
+            Class holding all playlists on the iPod
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.PlaylistList.GetPlaylistByName(System.String)">
+            <summary>
+            Returns the playlist with the given name.  If no playlists match, returns null
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.PlaylistList.Add(System.String)">
+            <summary>
+            Adds a new playlist with the specified name and returns the new playlist.
+            If there is already a playlist with the same name OperationNotAllowedException is thrown
+            </summary>
+            <param name="playlistName"></param>
+            <returns>Playlist</returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.PlaylistList.Contains(SharePodLib.Parsers.iTunesDB.Playlist)">
+            <summary>
+            Returns true if the iPod contains the specified playlist.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.PlaylistList.Remove(SharePodLib.Parsers.iTunesDB.Playlist,System.Boolean)">
+            <summary>
+            Remove a playlist from the iPod, optionally deleting contained tracks at the same time.
+            </summary>
+            <param name="item"></param>
+            <param name="deleteTracks"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.PlaylistList.FollowChanges(SharePodLib.Parsers.iTunesDB.PlaylistList)">
+            <summary>
+            To deal with different versions of iPods, there are 2 seperate versions of the Playlists list. (1 with Podcasts as a normal playlist,
+            the other with Podcasts as a special list.  SharePod sync's the 2 versions here.
+            </summary>
+            <param name="otherList"></param>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.PlaylistList.BindingList">
+            <summary>
+            Databound list of playlists on the iPod.  Playlists shouldnt be added/removed through this list (instead you should go through the normal
+            iPod.Playlists.Add("name"), but its useful to bind to a DataGridView or other control which supports databinding
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.PlaylistList.Count">
+            <summary>
+            How many playlists are on the iPod.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.NoSupportedArtworkException">
+            <summary>
+            Thrown when trying to add album artwork and the iPod reported no supported artwork.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.ITunesLockException">
+            <summary>
+            Thrown when an iTunesLock file exists on the iPod.  This usually means iTunes has locked the iPod
+            and is currently syncing.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.DataTypes.IPodTrackSize">
+            <summary>
+            Wraps a file size in bytes and a human-readable string describing the size.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.MenuIndexMHOD">
+            <summary>
+            Implements a Type-52 MHOD.  This is a fast lookup table the iPod uses for Artist, Album, Genre menus.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesCDB.ITunesCDBRoot">
+            <summary>
+            Implements an MHBD section in the iTunesCDB file.  The only difference between this file and the regular iTunesDB is the
+            content is zlib compressed.  
+            </summary>
+        </member>
+        <member name="M:UsbEject.Library.Util.Eject(System.String)">
+            <summary>
+            Eject a removable drive. Windows will display the standard 'removable device cannot be removed' if eject fails.
+            </summary>
+            <param name="driveLetter"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SharePodLib.Exceptions.UnsupportedIPodException">
+            <summary>
+            Thrown when the iPod is not supported.  This can be achieved by setting iPod.IsWritable=false.
+            
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.PlaylistListContainer">
+            <summary>
+            Implements a type 2 (Playlists list) MHSD entry in iTunesDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.AlbumListContainer">
+            <summary>
+            Implements a type 4 (Album list) MHSD entry in iTunesDB
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.TrackList">
+            <summary>
+            List of iPod tracks.  This is where tracks are added/removed from the iPod.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.TrackList.FindById(System.Int32)">
+            <summary>
+            Returns track matching specified Id.  Returns null if no matching track found.
+            </summary>
+            <param name="trackId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.TrackList.FindByDBId(System.Int64)">
+            <summary>
+            Returns track matching specified DBId.  Returns null if no matching track found.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.TrackList.Add(SharePodLib.NewTrack)">
+            <summary>
+            Adds a new track to the iPod.  Copies the file onto the iPod drive.
+            Throws exception if track couldn't be added, otherwise returns a full Track object.
+            </summary>
+            <param name="newItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.TrackList.Remove(SharePodLib.Parsers.iTunesDB.Track)">
+            <summary>
+            Deletes a track from the iPod.  The actual file is also deleted.
+            </summary>
+            <param name="track"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.TrackList.Contains(SharePodLib.Parsers.iTunesDB.Track)">
+            <summary>
+            Returns true if this tracklist contains the specified track.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.TrackList.GetTrackIndex(SharePodLib.Parsers.iTunesDB.Track)">
+            <summary>
+            Returns index of specified track, if track doesnt exist, returns -1.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.TrackList.GetEnumerator">
+            <summary>
+            Returns an enumerator for each track in this list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Parsers.iTunesDB.TrackList.GetExistingTrack(SharePodLib.NewTrack)">
+            <summary>
+            Returns a track with matching Title, artist, album, tracknumber.
+            If no existing track is found, return null;
+            </summary>
+            <param name="newTrack"></param>
+            <returns></returns>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.TrackList.BindingList">
+            <summary>
+            Databound list of tracks in this tracklist.  
+            Tracks shouldnt be added/removed through this list (instead you should go through the normal
+            iPod.Tracks.Add(newTrack), but its useful to bind to a DataGridView or other control which supports databinding
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.TrackList.Item(System.Int32)">
+            <summary>
+            Return the track at specified index.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:SharePodLib.Parsers.iTunesDB.TrackList.Count">
+            <summary>
+            Number of tracks in this list.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.DataTypes.IPodDateTime">
+            <summary>
+            Wraps a .NET DateTime and an iPod-format timestamp.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesCDB.SqliteTables_31">
+            <summary>
+            Implements the Sqlite tables for version 3.1 and above
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.MHODType2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.IPodImageFormat">
+            <summary>
+            Represents a single Artwork image size for a single Track. Each track with artwork will have at least 1 ArtworkFormat.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.Artwork.IPodImageFormat.LoadFromFile">
+            <summary>
+            Reads the binary data from the ArtworkFormat's .ithmb file and returns it as a Bitmap object.
+            You must .Dispose() the bitmap when you're finished with it to avoid memory leaks.
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.Artwork.IPodImageFormat.IsPhoto">
+            <summary>
+            True if this format is a photo, otherwise its cover art
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Parsers.Artwork.IPodImageFormat.IsFullResolution">
+            <summary>
+            Returns true if this is a full resolution format.  Full resolution images
+            are stored as the original image files, rather than packed into ithmb files.
+            The size is reported as 1000x1000 but this is just a placeholder as the size is not known 
+            until the image file is opened.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.ImageList">
+            <summary>
+            List of iPod images
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Parsers.Artwork.ImageList.Images">
+            <summary>
+            Enumerates each image in this ImageList.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SharePodLib.Parsers.Artwork.ImageAlbumItem">
+            <summary>
+            An Image Album
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Device">
+            <summary>
+            Contains static methods and events for receiving iPod device connection/disconnection events.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Device.ListenForDeviceChanges(System.IntPtr)">
+            <summary>
+            Tell SharePodLib to listen for iPod devices being connected.  The iPodConnected event will only fire once this is called.
+            </summary>
+            <param name="hWnd">Window handle of the calling application</param>
+        </member>
+        <member name="M:SharePodLib.Device.StopListeningForDeviceChanges">
+            <summary>
+            Tell SharePodLib to stop listening for iPod devices being connected. 
+            </summary>
+        </member>
+        <member name="E:SharePodLib.Device.IPodConnected">
+            <summary>
+            Fires when an iPod is connected. See ListenForDeviceChanges()
+            </summary>
+        </member>
+        <member name="E:SharePodLib.Device.IPodDisconnected">
+            <summary>
+            Fires when any removable drive is disconnected. You must check if the drive letter is the same as the drive letter of your IPod object.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Device.IPodConnectedHandler">
+            <summary>
+            Delegate used to notify of iPod connection.
+            </summary>
+            <param name="iPod"></param>
+        </member>
+        <member name="T:SharePodLib.Device.IPodDisconnectedHandler">
+            <summary>
+            Delegate used to notify of removable device disconnection.
+            </summary>
+            <param name="driveLetter"></param>
+        </member>
+        <member name="T:SharePodLib.Parsers.iTunesDB.PodcastListAdapter">
+            <summary>
+            Writes the necessary entries for the Podcast playlist in the Podcast MHSD section.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Export.IPodFileExporter">
+            <summary>
+            Class for copying tracks from the iPod to the PC
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.#ctor(SharePodLib.IPod)">
+            <summary>
+            IPodFileExporter constructor
+            </summary>
+            <param name="iPod"></param>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.SetTracksToCopy(System.Collections.Generic.List{SharePodLib.Parsers.iTunesDB.Track})">
+            <summary>
+            Set list of tracks to copy to PC using the config defined in constructor
+            </summary>
+            <param name="tracks"></param>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.SetPlaylistsToCopy(System.Collections.Generic.List{SharePodLib.Parsers.iTunesDB.Playlist})">
+            <summary>
+            Set list of playlists to copy using the config defined in constructor
+            </summary>
+            <param name="playlists"></param>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.PerformCopy(System.String,System.String,SharePodLib.Export.IITunesImporter,SharePodLib.Export.IPodFileExporter.FilenameCollisionBehavior)">
+            <summary>
+            Copy the selected items to the PC.
+            This should be called after a call to "SetTracksToCopy()" or SetPlaylistsToCopy().
+            </summary>
+            <param name="copyFolder">Output folder to copy files to</param>
+            <param name="copyFormat">
+            Defines the structure of the copied filename.
+            Supported tags are returned from IPodFileExporter.ValidFileNamePatternTokens.
+            For example: "[Artist] - [Album] - [Title]" or "[Artist]\[Album] - [Title]"
+            </param>
+            <param name="iTunesImporter">An IITunesImporter to use to import tracks into iTunes. Can be null</param>
+            <param name="collisionBehaviour">How to handle existing files</param>
+            <returns>List of copied filenames</returns>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.StopCopying">
+            <summary>
+            Stops the current copy operation.
+            The Completed event will still be raised (after the current file has finished copying) but this.Result.WasStopped will be true.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.PerformTracksCopy(SharePodLib.Export.IITunesImporter)">
+            <summary>
+            Actually do the copy.
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.PerformPlaylistCopy(SharePodLib.Export.IITunesImporter)">
+            <summary>
+            Copy the list of playlists
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.CopyTrack(SharePodLib.Parsers.iTunesDB.Track,System.Boolean@)">
+            <summary>
+            Copy the list of tracks
+            </summary>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.GetOutputFileName(SharePodLib.Parsers.iTunesDB.Track)">
+            <summary>
+            Builds up a filename from a Track and placeholder tokens.
+            </summary>
+            <param name="track"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.GetSafeTag(System.String)">
+            <summary>
+            Strips out bad characters to have in filenames
+            </summary>
+            <param name="tag"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharePodLib.Export.IPodFileExporter.GetNewFileNameForFile(System.String)">
+            <summary>
+            Generates Copy of xxx or Copy (x) of xxx filenames.
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="E:SharePodLib.Export.IPodFileExporter.ProgressEvent">
+            <summary>
+            Fires when a track has been transferred.
+            </summary>
+        </member>
+        <member name="E:SharePodLib.Export.IPodFileExporter.ProgressErrorEvent">
+            <summary>
+            Fires when an error occured transferring a song 
+            </summary>
+        </member>
+        <member name="E:SharePodLib.Export.IPodFileExporter.Completed">
+            <summary>
+            Fires when all songs have been transfer
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IPodFileExporter.Result">
+            <summary>
+            The result of PerformCopy.  Includes 
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IPodFileExporter.TrackCount">
+            <summary>
+            How many tracks are in the copy list
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Export.IPodFileExporter.ValidFileNamePatternTokens">
+            <summary>
+            Contains the tokens to be used for the copyFormat argument.  E.g [Title], [Artist] etc.
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Export.IPodFileExporter.FilenameCollisionBehavior">
+            <summary>
+            How to handle files that already exist. Either ignore (don't copy) or Rename (Copy of ..., Copy (2) of ...)
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Export.IPodFileExporter.ProgressEventHandler">
+            <summary>
+            Delegate for song transferred event
+            </summary>
+            <param name="track"></param>
+        </member>
+        <member name="T:SharePodLib.Export.IPodFileExporter.ProgressErrorEventHandler">
+            <summary>
+            Delegate for song transfer error event
+            </summary>
+            <param name="track"></param>
+            <param name="errorMessage"></param>
+        </member>
+        <member name="T:SharePodLib.Export.IPodFileExporter.CompletedEventHandler">
+            <summary>
+            Delegate for all songs transferred complete event
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:SharePodLib.Exceptions.TrackAlreadyExistsException">
+            <summary>
+            Thrown when trying to add a track to the iPod which already exists. (Same Title, Artist, Album, TrackNumber)
+            </summary>
+        </member>
+        <member name="P:SharePodLib.Exceptions.TrackAlreadyExistsException.ExistingTrack">
+            <summary>
+            Track that is on the iPod already
+            </summary>
+        </member>
+        <member name="T:SharePodLib.Exceptions.OutOfDiskSpaceException">
+            <summary>
+            Thrown when adding tracks and adding new artwork to the iPod.  SharePodLib will make sure there will be at least 10Mb of free space on the 
+            iPod after copying the track.
+            </summary>
+        </member>
+    </members>
+</doc>

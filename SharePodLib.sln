@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePodLib", "SharePodLib.csproj", "{9F406795-C08D-48E8-875D-0DB67930E6F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPhoneConnector", "IPhoneConnector\IPhoneConnector.csproj", "{9623656C-2E84-41D2-9E8C-EE3FC4FCE8C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F406795-C08D-48E8-875D-0DB67930E6F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F406795-C08D-48E8-875D-0DB67930E6F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F406795-C08D-48E8-875D-0DB67930E6F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F406795-C08D-48E8-875D-0DB67930E6F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9623656C-2E84-41D2-9E8C-EE3FC4FCE8C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9623656C-2E84-41D2-9E8C-EE3FC4FCE8C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9623656C-2E84-41D2-9E8C-EE3FC4FCE8C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9623656C-2E84-41D2-9E8C-EE3FC4FCE8C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		
+	EndGlobalSection
+EndGlobal

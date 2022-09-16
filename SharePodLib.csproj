@@ -1,0 +1,274 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9F406795-C08D-48E8-875D-0DB67930E6F7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SharePodLib</RootNamespace>
+    <AssemblyName>SharePodLib</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\SharePodLib.XML</DocumentationFile>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\SharePodLib.XML</DocumentationFile>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="icu.net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=416fdd914afa6b66, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.65.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zlib.net, Version=1.0.3.0, Culture=neutral, PublicKeyToken=47d7877cb3620160" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DebugLogger.cs" />
+    <Compile Include="Exceptions\FileLockException.cs" />
+    <Compile Include="Exceptions\HashGenerationException.cs" />
+    <Compile Include="Exceptions\UnsupportedIPodException.cs" />
+    <Compile Include="Export\IITunesImporter.cs" />
+    <Compile Include="Forms\FileCopyPrompt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FileCopyPrompt.Designer.cs">
+      <DependentUpon>FileCopyPrompt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IPodDevice\Device.cs" />
+    <Compile Include="IPodDevice\DeviceHook.cs" />
+    <Compile Include="IPodDevice\FileSystems\IDeviceInfo.cs" />
+    <Compile Include="IPodDevice\FileSystems\IPhone\IPhoneDeviceInfo.cs" />
+    <Compile Include="IPodDevice\FileSystems\Standard\XmlQueryDeviceInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IPodDevice\FileSystems\DeviceFileSystem.cs" />
+    <Compile Include="IPodDevice\FileSystems\IPhone\IPhoneFileSystem.cs" />
+    <Compile Include="IPodDevice\FileSystems\Standard\StandardFileSystem.cs" />
+    <Compile Include="IPodDevice\UsbEject\Device.cs" />
+    <Compile Include="IPodDevice\UsbEject\DeviceCapabilities.cs" />
+    <Compile Include="IPodDevice\UsbEject\DeviceClass.cs" />
+    <Compile Include="IPodDevice\UsbEject\DiskDeviceClass.cs" />
+    <Compile Include="IPodDevice\UsbEject\Eject.cs" />
+    <Compile Include="IPodDevice\UsbEject\Native.cs" />
+    <Compile Include="IPodDevice\UsbEject\Volume.cs" />
+    <Compile Include="IPodDevice\UsbEject\VolumeDeviceClass.cs" />
+    <Compile Include="IPodDevice\UsbEject\WMIDiskDrive.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Exceptions\ArtworkDBNotFoundException.cs" />
+    <Compile Include="Exceptions\DeviceQueryException.cs" />
+    <Compile Include="Exceptions\ITunesLockException.cs" />
+    <Compile Include="Exceptions\NoSupportedArtworkException.cs" />
+    <Compile Include="Exceptions\UnsupportedArtworkFormatException.cs" />
+    <Compile Include="Export\IPodFileExporterResult.cs" />
+    <Compile Include="Parsers\Artwork\ArtworkDB.cs" />
+    <Compile Include="Parsers\Artwork\ArtworkDBRoot.cs" />
+    <Compile Include="Parsers\Artwork\ImageAlbum.cs" />
+    <Compile Include="Parsers\Artwork\ImageAlbumItem.cs" />
+    <Compile Include="Parsers\Artwork\ImageAlbumList.cs" />
+    <Compile Include="Parsers\Artwork\ImageAlbumListContainer.cs" />
+    <Compile Include="Parsers\Artwork\IThmbFileList.cs" />
+    <Compile Include="Parsers\Artwork\IThmbFileListContainer.cs" />
+    <Compile Include="Parsers\Artwork\IThmbFile.cs" />
+    <Compile Include="Parsers\Artwork\PhotoDB.cs" />
+    <Compile Include="Parsers\Artwork\SupportedArtworkFormat.cs" />
+    <Compile Include="Parsers\Artwork\IPodImage.cs" />
+    <Compile Include="Parsers\Artwork\ImageList.cs" />
+    <Compile Include="Parsers\Artwork\ImageListContainer.cs" />
+    <Compile Include="Parsers\Artwork\IPodImageFormat.cs" />
+    <Compile Include="Parsers\Artwork\ListContainerHeader.cs" />
+    <Compile Include="Parsers\Artwork\MHODType2.cs" />
+    <Compile Include="Parsers\Artwork\UnknownListContainer.cs" />
+    <Compile Include="Parsers\Base\BaseDatabase.cs" />
+    <Compile Include="Parsers\iTunesCDB\ITunesCDBRoot.cs" />
+    <Compile Include="Parsers\iTunesCDB\SqliteTables_31.cs" />
+    <Compile Include="Parsers\iTunesCDB\SqliteTables.cs" />
+    <Compile Include="Parsers\iTunesCDB\SqliteFunctions.cs" />
+    <Compile Include="Parsers\iTunesCDB\SqliteTables_Nano5G.cs" />
+    <Compile Include="Parsers\iTunesDB\DatabaseHash\DatabaseHasher.cs" />
+    <Compile Include="Parsers\iTunesDB\DatabaseHash\Hash58.cs" />
+    <Compile Include="Parsers\iTunesDB\DatabaseHash\Hash72.cs" />
+    <Compile Include="Parsers\iTunesDB\MHOD\ArtworkStringMHOD.cs" />
+    <Compile Include="Parsers\iTunesDB\MHOD\MenuIndexMHOD.cs" />
+    <Compile Include="Parsers\iTunesDB\MHOD\MHODFactory.cs" />
+    <Compile Include="Parsers\iTunesDB\MHOD\PlaylistPositionMHOD.cs" />
+    <Compile Include="Parsers\iTunesDB\MHOD\UnicodeMHOD.cs" />
+    <Compile Include="Parsers\iTunesDB\MHOD\StringMHOD.cs" />
+    <Compile Include="Parsers\iTunesDB\MHOD\UnknownMHOD.cs" />
+    <Compile Include="Parsers\iTunesDB\PlaylistSorter.cs" />
+    <Compile Include="Parsers\iTunesDB\Type5Container.cs" />
+    <Compile Include="Parsers\iTunesDB\Type6Container.cs" />
+    <Compile Include="SerialNumberGenerator.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="WinAPI.cs" />
+    <Compile Include="DataTypes\IPodRating.cs" />
+    <Compile Include="Exceptions\BaseSharePodLibException.cs" />
+    <Compile Include="Exceptions\InvalidIPodDriveException.cs" />
+    <Compile Include="Exceptions\InvalidValueException.cs" />
+    <Compile Include="Exceptions\IPodNotFoundException.cs" />
+    <Compile Include="Exceptions\OperationNotAllowedException.cs" />
+    <Compile Include="Exceptions\OutOfDiskSpaceException.cs" />
+    <Compile Include="Exceptions\TrackAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\UnknownSortOrderException.cs" />
+    <Compile Include="Exceptions\UnsupportedITunesVersionException.cs" />
+    <Compile Include="Export\ITunesFileWriter.cs" />
+    <Compile Include="Forms\LoadingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoadingForm.Designer.cs">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IPod.cs" />
+    <Compile Include="Export\IPodFileExporter.cs" />
+    <Compile Include="DataTypes\IPodDateTime.cs" />
+    <Compile Include="DataTypes\IPodTrackLength.cs" />
+    <Compile Include="DataTypes\IPodTrackSize.cs" />
+    <Compile Include="IPodBackup.cs" />
+    <Compile Include="iPodFamilyEnum.cs" />
+    <Compile Include="NewTrack.cs" />
+    <Compile Include="Parsers\Artwork\ArtworkHelper.cs" />
+    <Compile Include="Parsers\Helpers.cs" />
+    <Compile Include="Parsers\Base\BaseDatabaseElement.cs" />
+    <Compile Include="Databinding\SortableFilteringBindingList.cs" />
+    <Compile Include="Databinding\DataBoundList.cs" />
+    <Compile Include="Databinding\PropertyComparer.cs" />
+    <Compile Include="Parsers\MusicDatabase.cs" />
+    <Compile Include="Parsers\iTunesDB\iTunesDBRoot.cs" />
+    <Compile Include="Parsers\iTunesDB\Playlist.cs" />
+    <Compile Include="Parsers\iTunesDB\PlaylistItem.cs" />
+    <Compile Include="Parsers\iTunesDB\PlaylistList.cs" />
+    <Compile Include="Parsers\iTunesDB\PodcastListAdapter.cs" />
+    <Compile Include="Parsers\iTunesDB\Track.cs" />
+    <Compile Include="Parsers\iTunesDB\IdGenerator.cs" />
+    <Compile Include="Parsers\iTunesDB\TrackList.cs" />
+    <Compile Include="Parsers\iTunesDB\MHOD\BaseMHODElement.cs" />
+    <Compile Include="Parsers\iTunesDB\AlbumListContainer.cs" />
+    <Compile Include="Parsers\iTunesDB\PlaylistListV2Container.cs" />
+    <Compile Include="Parsers\iTunesDB\TrackListContainer.cs" />
+    <Compile Include="Parsers\iTunesDB\PlaylistListContainer.cs" />
+    <Compile Include="Parsers\iTunesDB\ListContainerHeader.cs" />
+    <Compile Include="Parsers\iTunesDB\UnknownListContainer.cs" />
+    <Compile Include="Parsers\iTunesSD\Entry.cs" />
+    <Compile Include="Parsers\iTunesSD\Header.cs" />
+    <Compile Include="Parsers\iTunesSD\ITunesSD.cs" />
+    <Compile Include="Exceptions\ParseException.cs" />
+    <Compile Include="Parsers\PlayCounts\Entry.cs" />
+    <Compile Include="Parsers\PlayCounts\Header.cs" />
+    <Compile Include="Parsers\PlayCounts\PlayCounts.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SharePodLib.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lib\icu.net.dll" />
+    <Content Include="Lib\System.Data.SQLite.DLL" />
+    <Content Include="Lib\zlib.net.dll" />
+    <Content Include="Licence.txt" />
+    <Content Include="Readme.txt" />
+    <EmbeddedResource Include="Resources\icudt4n.dll" />
+    <EmbeddedResource Include="Resources\icuin4n.dll" />
+    <EmbeddedResource Include="Resources\icuuc4n.dll" />
+    <EmbeddedResource Include="Resources\hash72.dll" />
+    <EmbeddedResource Include="Resources\SharePodLibHelper.exe" />
+    <None Include="Resources\logo.png" />
+    <Content Include="Resources\SplashScreen.png" />
+    <EmbeddedResource Include="Resources\sqlite3.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\FileCopyPrompt.resx">
+      <DependentUpon>FileCopyPrompt.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoadingForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\IPhone\IPhoneConnector\IPhoneConnector.csproj">
+      <Project>{9623656C-2E84-41D2-9E8C-EE3FC4FCE8C4}</Project>
+      <Name>IPhoneConnector</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

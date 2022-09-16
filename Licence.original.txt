@@ -1,0 +1,44 @@
+SharePodLib Licence Agreement
+==============================
+
+By downloading and using this software you agree to the following terms and conditions:
+
+The unlicenced version of SharePodLib may be used for personal and non-commercial development purposes only.
+
+If you include SharePodLib with a commercial product, you must purchase a commercial licence key (http://shareit.com/product.html?productid=300167464). 
+Alternatively, the complete source code to SharePodLib can be purchased (http://www.shareit.com/programs.html?productid=300223814)
+
+There are no royalties of any kind.
+You only need to buy a single license *per product*, no matter how many copies of your product you distribute.
+Note that the definition of commercial software also includes internal applications whether they are available to the public or not.
+
+
+You shall not:
+==============
+
+a) Use, copy, modify, translate or merge the software except as provided in this agreement;
+b) Reverse-engineer, dissemble, or decompile the software;
+c) Sublicense, rent, lease, or assign any portion of the software;
+
+Copyright.
+==========
+
+The Software is owned by Jeffrey Harris and is protected by New Zealand copyright laws and international treaty provisions. You shall treat the software like any copyrighted material.
+
+Limited Warranty.
+=================
+
+EXCEPT AS EXPRESSLY STATED HEREIN, THE SOFTWARE IS PROVIDED "AS IS." YOU SHALL BE ENTIRELY RESPONSIBLE FOR THE SELECTION OF THE SOFTWARE AND FOR THE INSTALLATION OF, USE OF, AND RESULTS OBTAINED FROM, THE SOFTWARE.
+
+ALL OTHER WARRANTIES OR CONDITIONS, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, WITH RESPECT TO THE SOFTWARE AND WRITTEN MATERIALS ACCOMPANYING THE SOFTWARE, ARE EXCLUDED FROM THE LICENSE.
+
+No liability for Consequential Damages.
+=======================================
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE CREATOR OF THIS SOFTWARE BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT, OR 
+CONSEQUENTIAL DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, 
+LOSS OF BUSINESS INFORMATION, OR ANY OTHER PECUNIARY LOSS) ARISING OUT OF THE USE OF OR INABILITY TO USE THE SOFTWARE PRODUCT 
+OR THE FAILURE TO PROVIDE SUPPORT SERVICES.
+
+
+This license and your right to use the software shall terminate automatically if you violate any part of this agreement.
